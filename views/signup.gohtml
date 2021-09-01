@@ -1,4 +1,22 @@
 {{define "yield"}}
+<div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+    <div class="card border-primary">
+      <div class="card-header bg-primary">
+        <h4 class="card-title text-white">Sign Up Now!</h4>
+      </div>
+      <div class="card-body">
+        {{template "signupForm"}}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4"></div>
+</div>
+{{end}}
+
+
+{{define "signupForm"}}
 <form>
   <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
