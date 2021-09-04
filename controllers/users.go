@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gorilla/schema"
 	"github.com/sderohan/photo-gallery/views"
 )
 
@@ -32,12 +31,12 @@ func (u *Users) New(w http.ResponseWriter, r *http.Request) {
 // This is used to process the signup form when a user tries to create a new user account.
 // POST /signup
 func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
-	if err := r.ParseForm(); err != nil {
-		panic(err)
-	}
-	dec := schema.NewDecoder()
+
 	var form SignupForm
-	if err := dec.Decode(&form, r.PostForm); err != nil {
+
+	// fetch the data
+	// destination for Decode function should be the pointer
+	if err := parseForm(r, &form); err != nil {
 		panic(err)
 	}
 	fmt.Fprintln(w, form)
