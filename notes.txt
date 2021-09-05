@@ -1,0 +1,18 @@
+
+Different types of routers in golang
+1) default http ServeMux router
+- this router comes default with net/http package
+- easy to use
+- doesn't support regex and named url matching
+- it has default 404 page
+- match the longest prefix first
+
+2) julienschmidt/httprouter
+- easy and cpu performance improved router
+- considered best for rendering static page
+- supports named url (/:named-url)
+
+3) Gorilla mux 
+- part of gorilla web tookit with lot's of packages
+- comes with lot's of features
+- supports regex, named url and lot's of other features
