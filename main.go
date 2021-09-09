@@ -12,6 +12,7 @@ func main() {
 	usersC := controllers.NewUsers()
 
 	r := mux.NewRouter()
+	//rendering is handled inside the ServeHTTP overriden method inside view.go file
 	r.Handle("/", staticC.Home).Methods("GET")
 	r.Handle("/contact", staticC.Contact).Methods("GET")
 

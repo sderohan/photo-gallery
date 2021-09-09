@@ -37,6 +37,7 @@ type View struct {
 
 //override the ServeHTTP method from handler interface inorder to avoid
 //method creation for each view rendering
+//called by the handler which is in main.go file (Handle who registered the handler)
 func (v *View) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	if err := v.Render(w, nil); err != nil {
