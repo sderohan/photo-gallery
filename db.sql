@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS photo_gallery;
 USE photo_gallery;
 
 CREATE TABLE users IF NOT EXISTS (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30), 
     email VARCHAR(50) NOT NULL
 );
