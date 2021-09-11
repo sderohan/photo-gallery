@@ -4,20 +4,24 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/sderohan/photo-gallery/models"
 	"github.com/sderohan/photo-gallery/views"
 )
 
-func NewUsers() *Users {
+func NewUsers(us *models.UserService) *Users {
 	return &Users{
 		NewView: views.NewView("bootstrap", "users/new"),
+		us:      us,
 	}
 }
 
 type Users struct {
 	NewView *views.View
+	us      *models.UserService
 }
 
 type SignupForm struct {
+	Name     string `schema:"name"`
 	Email    string `schema:"email"`
 	Password string `schema:"password"`
 }
@@ -31,7 +35,6 @@ func (u *Users) New(w http.ResponseWriter, r *http.Request) {
 // This is used to process the signup form when a user tries to create a new user account.
 // POST /signup
 func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
-
 	var form SignupForm
 
 	// fetch the data
@@ -43,4 +46,12 @@ func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
 
 	// fmt.Fprintln(w, r.PostForm["email"])
 	// fmt.Fprintln(w, r.PostForm["password"])
+	user := &models.User{
+		Name:  form.Name,
+		Email: form.Email,
+	}
+	err := u.us.Create(user)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
