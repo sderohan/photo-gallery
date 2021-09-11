@@ -27,6 +27,7 @@ func main() {
 	}
 	// Close the connection
 	defer us.Close()
+	us.AutoMigrate()
 
 	staticC := controllers.NewStatic()
 	usersC := controllers.NewUsers(us)

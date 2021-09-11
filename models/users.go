@@ -92,7 +92,14 @@ func (us *UserService) DestructiveReset() {
 	if err != nil {
 		panic(err)
 	}
-	us.db.AutoMigrate(&User{})
+}
+
+// AutoMigrate will attempt to automatically migrate the users table
+func (us *UserService) AutoMigrate() error {
+	if err := us.db.AutoMigrate(&User{}); err != nil {
+		return err
+	}
+	return nil
 }
 
 // Close the database connection
