@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	_ "github.com/go-sql-driver/mysql"
+	"golang.org/x/crypto/bcrypt"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"gorm.io/driver/mysql"
@@ -69,6 +70,12 @@ func first(db *gorm.DB, dst interface{}) error {
 
 // Create will create the provided user and backfill data
 func (us *UserService) Create(user *User) error {
+	hashedBytes, error := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if error != nil {
+		return error
+	}
+	user.PasswordHash = string(hashedBytes)
+	user.Password = ""
 	return us.db.Create(user).Error
 }
 
@@ -113,6 +120,8 @@ func (us *UserService) Close() error {
 
 type User struct {
 	gorm.Model
-	Name  string
-	Email string `gorm:"index;not null;unique"`
+	Name         string
+	Email        string `gorm:"index;not null;unique"`
+	Password     string `gorm:"-"`
+	PasswordHash string `gorm:"not null"`
 }

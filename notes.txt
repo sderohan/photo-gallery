@@ -16,3 +16,14 @@ Different types of routers in golang
 - part of gorilla web tookit with lot's of packages
 - comes with lot's of features
 - supports regex, named url and lot's of other features
+
+salting 
+adding dummy string at the end of the user password
+for eg
+password = "user"
+salt = "some random string"
+hash(password+salt)
+every user will have the unique salt
+
+pepper 
+same as salt but pepper is application specific

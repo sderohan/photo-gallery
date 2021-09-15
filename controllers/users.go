@@ -42,15 +42,16 @@ func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
 	if err := parseForm(r, &form); err != nil {
 		panic(err)
 	}
-	fmt.Fprintln(w, form)
 
 	// fmt.Fprintln(w, r.PostForm["email"])
 	// fmt.Fprintln(w, r.PostForm["password"])
 	user := &models.User{
-		Name:  form.Name,
-		Email: form.Email,
+		Name:     form.Name,
+		Email:    form.Email,
+		Password: form.Password,
 	}
 	err := u.us.Create(user)
+	fmt.Fprintln(w, user)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

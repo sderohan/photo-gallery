@@ -27,6 +27,7 @@ func main() {
 	}
 	// Close the connection
 	defer us.Close()
+	us.DestructiveReset()
 	us.AutoMigrate()
 
 	staticC := controllers.NewStatic()
