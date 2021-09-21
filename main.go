@@ -27,7 +27,7 @@ func main() {
 	}
 	// Close the connection
 	defer us.Close()
-	us.DestructiveReset()
+	// us.DestructiveReset()
 	us.AutoMigrate()
 
 	staticC := controllers.NewStatic()
@@ -40,6 +40,9 @@ func main() {
 
 	r.Handle("/signup", usersC.NewView).Methods("GET")
 	r.HandleFunc("/signup", usersC.Create).Methods("POST")
+
+	//cookie test
+	r.HandleFunc("/cookietest", usersC.CookieTest).Methods("GET")
 
 	r.Handle("/login", usersC.LoginView).Methods("GET")
 	r.HandleFunc("/login", usersC.Login).Methods("POST")
