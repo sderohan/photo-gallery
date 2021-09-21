@@ -58,10 +58,13 @@ func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
 		Password: form.Password,
 	}
 	err := u.us.Create(user)
-	fmt.Fprintln(w, user)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+
+	// login automatically after creating account
+	signIn(w, user)
+	http.Redirect(w, r, "/cookietest", http.StatusFound)
 }
 
 // Login is used to verify the provided email address and
@@ -86,13 +89,8 @@ func (u *Users) Login(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	}
-
-	cookie := http.Cookie{
-		Name:  "email",
-		Value: user.Email,
-	}
-	http.SetCookie(w, &cookie)
-	fmt.Fprintln(w, user)
+	signIn(w, user)
+	http.Redirect(w, r, "/cookietest", http.StatusFound)
 }
 
 // CookieTest is used to display cookies set on the current user
@@ -102,4 +100,12 @@ func (u *Users) CookieTest(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	fmt.Fprintln(w, "Email is : ", cookie.Value)
+}
+
+func signIn(w http.ResponseWriter, user *models.User) {
+	cookie := http.Cookie{
+		Name:  "email",
+		Value: user.Email,
+	}
+	http.SetCookie(w, &cookie)
 }
