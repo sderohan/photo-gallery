@@ -4,10 +4,10 @@
   <div class="col-lg-4">
     <div class="card border-primary">
       <div class="card-header bg-primary">
-        <h4 class="card-title text-white">Happy to see you</h4>
+        <h4 class="card-title text-white">Welcome back</h4>
       </div>
       <div class="card-body">
-        {{template "signupForm"}}
+        {{template "loginForm"}}
       </div>
     </div>
   </div>
@@ -16,12 +16,8 @@
 {{end}}
 
 
-{{define "signupForm"}}
-<form action="/signup" method="POST">
-  <div class="mb-3">
-    <label for="text" class="form-label">Name</label>
-    <input type="text" class="form-control" id="text" placeholder="Name address" name="name" autocomplete="off" required>
-  </div>
+{{define "loginForm"}}
+<form action="/login" method="POST">
   <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
     <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email address" name="email" autocomplete="off" required>
@@ -30,6 +26,6 @@
     <label for="password" class="form-label">Password</label>
     <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
   </div>
-  <button type="submit" class="btn btn-primary">Sign Up</button>
+  <button type="submit" class="btn btn-primary">Login</button>
 </form>
 {{end}}
