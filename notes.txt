@@ -27,3 +27,17 @@ every user will have the unique salt
 
 pepper 
 same as salt but pepper is application specific
+
+Five major attack vectors
+
+1. Cookie tampering
+    - Editing Cookies
+2. A database leak that allows users to create fake Cookies
+    - Use DB data to create Cookies
+3. Cross site scripting (XSS)
+    - Letting users inject JS into your site
+4. Cookie theft (via packet sniffin or physical access)
+    - Stealing cookes and pretending they are yours
+5. Cross site request forgery(CSRF)
+    - Sending web requests to other servers on behalf of a user w/ut them knowing
+    
