@@ -20,6 +20,8 @@ var (
 	ErrInvalidID = errors.New("models: ID provided was invalid")
 )
 
+const userPwPepper = "c1dde044867975d5c9e3198c4400411b"
+
 func NewUserService(connectionInfo string) (*UserService, error) {
 	db, err := gorm.Open(mysql.Open(connectionInfo), &gorm.Config{})
 	if err != nil {
@@ -70,7 +72,8 @@ func first(db *gorm.DB, dst interface{}) error {
 
 // Create will create the provided user and backfill data
 func (us *UserService) Create(user *User) error {
-	hashedBytes, error := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	pwBytes := []byte(user.Password + userPwPepper)
+	hashedBytes, error := bcrypt.GenerateFromPassword([]byte(pwBytes), bcrypt.DefaultCost)
 	if error != nil {
 		return error
 	}
