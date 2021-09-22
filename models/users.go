@@ -19,7 +19,7 @@ var (
 	// to a method like Delete
 	ErrInvalidID = errors.New("models: ID provided was invalid")
 
-	// ErrInvalidPassword is returned when an invalid pasword
+	// ErrInvalidPassword is returned when an invalid password
 	// is used during login
 	ErrInvalidPassword = errors.New("mdels: incorrect password provided")
 )

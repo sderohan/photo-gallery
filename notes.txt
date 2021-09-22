@@ -36,7 +36,7 @@ Five major attack vectors
     - Use DB data to create Cookies
 3. Cross site scripting (XSS)
     - Letting users inject JS into your site
-4. Cookie theft (via packet sniffin or physical access)
+4. Cookie theft (via packet sniffing or physical access)
     - Stealing cookes and pretending they are yours
 5. Cross site request forgery(CSRF)
     - Sending web requests to other servers on behalf of a user w/ut them knowing

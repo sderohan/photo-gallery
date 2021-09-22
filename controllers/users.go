@@ -104,8 +104,9 @@ func (u *Users) CookieTest(w http.ResponseWriter, r *http.Request) {
 
 func signIn(w http.ResponseWriter, user *models.User) {
 	cookie := http.Cookie{
-		Name:  "email",
-		Value: user.Email,
+		Name:     "email",
+		Value:    user.Email,
+		HttpOnly: true,
 	}
 	http.SetCookie(w, &cookie)
 }
