@@ -11,7 +11,7 @@ import (
 
 const (
 	host     = "localhost"
-	port     = 49154
+	port     = 3306
 	user     = "root"
 	password = "root"
 	dbname   = "photo_gallery"
@@ -28,7 +28,7 @@ func main() {
 	// Close the connection
 	defer us.Close()
 	// us.DestructiveReset()
-	// us.AutoMigrate()
+	us.AutoMigrate()
 
 	staticC := controllers.NewStatic()
 	usersC := controllers.NewUsers(us)
