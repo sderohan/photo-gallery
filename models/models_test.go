@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func testUserService() (*UserService, error) {
+func testUserService() (UserService, error) {
 	const (
 		host     = "localhost"
 		port     = 49154
